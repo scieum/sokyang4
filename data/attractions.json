@@ -1,0 +1,102 @@
+[
+  {
+    "id": "a-ulsanbawi",
+    "name": "설악산 울산바위",
+    "type": "outdoor",
+    "category": "속초 8경 · 산",
+    "description": "설악산을 대표하는 거대한 화강암 봉우리. 흔들바위를 거쳐 오르는 코스가 유명하다.",
+    "weatherProof": false,
+    "lat": 38.1761,
+    "lng": 128.4631
+  },
+  {
+    "id": "a-yeonggeumjeong",
+    "name": "영금정",
+    "type": "outdoor",
+    "category": "속초 8경 · 해안",
+    "description": "파도가 부딪히며 거문고 소리를 낸다는 정자. 일출 명소로 유명하다.",
+    "weatherProof": false,
+    "lat": 38.2156,
+    "lng": 128.6005
+  },
+  {
+    "id": "a-oeongchi",
+    "name": "외옹치 바다향기로",
+    "type": "outdoor",
+    "category": "해안 산책로",
+    "description": "해안 절벽을 따라 걷는 산책로. 계단 구간이 많아 강풍 시 주의가 필요하다.",
+    "weatherProof": false,
+    "lat": 38.1869,
+    "lng": 128.6042
+  },
+  {
+    "id": "a-beach",
+    "name": "속초해수욕장",
+    "type": "outdoor",
+    "category": "속초 8경 · 해변",
+    "description": "넓은 백사장과 완만한 해안길. 무장애 동선이 비교적 잘 갖춰져 있다.",
+    "weatherProof": false,
+    "lat": 38.1897,
+    "lng": 128.6017
+  },
+  {
+    "id": "a-cheongchoho",
+    "name": "청초호 호수공원",
+    "type": "outdoor",
+    "category": "속초 8경 · 호수",
+    "description": "도심 속 석호. 평탄한 산책로가 잘 정비되어 가벼운 산책에 좋다.",
+    "weatherProof": false,
+    "lat": 38.2002,
+    "lng": 128.5942
+  },
+  {
+    "id": "a-yeongrangho",
+    "name": "영랑호 범바위",
+    "type": "outdoor",
+    "category": "속초 8경 · 호수",
+    "description": "신라 화랑 영랑이 감탄했다는 석호. 둘레길과 부교가 조성되어 있다.",
+    "weatherProof": false,
+    "lat": 38.2156,
+    "lng": 128.5817
+  },
+  {
+    "id": "a-mountain-museum",
+    "name": "국립산악박물관",
+    "type": "indoor",
+    "category": "박물관",
+    "description": "산악 문화와 등반 역사를 소개하는 실내 박물관. 악천후 대안 동선의 핵심.",
+    "weatherProof": true,
+    "lat": 38.1764,
+    "lng": 128.5392
+  },
+  {
+    "id": "a-city-museum",
+    "name": "속초시립박물관",
+    "type": "indoor",
+    "category": "박물관",
+    "description": "속초의 실향민 문화와 어촌 생활사를 전시. 실내 관람으로 날씨 영향이 적다.",
+    "weatherProof": true,
+    "lat": 38.1869,
+    "lng": 128.5489
+  },
+  {
+    "id": "a-expo-tower",
+    "name": "속초엑스포타워 전망대",
+    "type": "indoor",
+    "category": "전망대",
+    "description": "청초호와 동해를 한눈에 담는 실내 전망대. 비 오는 날에도 조망이 가능하다.",
+    "weatherProof": true,
+    "lat": 38.1981,
+    "lng": 128.5961
+  },
+  {
+    "id": "a-fish-market",
+    "name": "속초관광수산시장",
+    "type": "indoor",
+    "category": "전통시장",
+    "description": "지붕이 있는 실내 시장 구간이 많아 우천 시에도 먹거리 탐방이 가능하다.",
+    "weatherProof": true,
+    "lat": 38.2078,
+    "lng": 128.5919
+  }
+]
