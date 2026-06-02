@@ -1,43 +1,49 @@
 @import "tailwindcss";
 
 /*
-  Apple Human Interface Guidelines 토큰 (디자인.md 기반)
-  - 단일 액센트: Apple Blue #0071e3 (인터랙티브 요소 전용)
-  - 흑(#000) / 라이트그레이(#f5f5f7) 교차 섹션
-  - SF Pro 폰트 스택 (Apple 기기에서 -apple-system → SF Pro 해석)
+  Pinterest Gestalt 토큰 (design.md 기반)
+  - 단일 액센트: Pinterest Red #e60023 (Primary CTA 전용)
+  - 따뜻한 화이트 캔버스 + 올리브/샌드 뉴트럴
+  - 플럼 블랙(#211922) 텍스트, 16px 라운드(필 아님)
 */
 :root {
-  --black: #000000;
-  --fog: #f5f5f7;
-  --near-black: #1d1d1f;
-  --apple-blue: #0071e3;
-  --link-blue: #0066cc;
-  --bright-blue: #2997ff;
-  --card-shadow: rgba(0, 0, 0, 0.22) 3px 5px 30px 0px;
+  --pin-red: #e60023;
+  --plum-black: #211922;
+  --olive-gray: #62625b;
+  --warm-silver: #91918c;
+  --sand-gray: #e5e5e0;
+  --warm-light: #e0e0d9;
+  --fog: #f6f6f3;
+  --dark-surface: #33332e;
+  --focus-blue: #435ee5;
 
   --background: #ffffff;
-  --foreground: var(--near-black);
-}
-
-html {
-  scroll-behavior: smooth;
+  --foreground: var(--plum-black);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  /* SF Pro Display/Text는 Apple 기기에서 -apple-system으로 해석됨 */
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
-    "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  /* Pin Sans 폴백 스택 (글로벌 CJK 포함) */
+  font-family: "Pin Sans", -apple-system, system-ui, "Segoe UI", Roboto,
+    "Apple SD Gothic Neo", "Noto Sans KR", "Helvetica Neue", Helvetica,
+    "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  letter-spacing: -0.374px; /* Apple은 본문에도 음수 트래킹 적용 */
 }
 
-/* 키보드 포커스 링: Apple Blue 2px (HIG 접근성) */
+/* 포커스 링: Focus Blue (Gestalt 시맨틱 토큰) */
 :focus-visible {
-  outline: 2px solid var(--apple-blue);
+  outline: 2px solid var(--focus-blue);
   outline-offset: 2px;
+}
+
+/* 메이슨리 그리드 (Pinterest 시그니처 레이아웃) */
+.masonry {
+  column-gap: 1.25rem;
+}
+.masonry > * {
+  break-inside: avoid;
+  margin-bottom: 1.25rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -46,6 +52,5 @@ body {
   *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
   }
 }

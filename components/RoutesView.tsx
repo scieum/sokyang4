@@ -43,10 +43,10 @@ export default function RoutesView({
           <button
             key={value}
             onClick={() => setWeather(value)}
-            className={`inline-flex items-center gap-2 rounded-[980px] px-4 py-2 text-[14px] tracking-[-0.224px] transition ${
+            className={`inline-flex items-center gap-2 rounded-2xl px-4 py-2 text-[14px] font-bold transition ${
               weather === value
-                ? "bg-[#0071e3] text-white"
-                : "bg-white text-black/80 hover:bg-black/[0.03]"
+                ? "bg-[#e60023] text-white"
+                : "bg-[#e5e5e0] text-[#211922] hover:bg-[#d9d9d2]"
             }`}
           >
             <Icon size={16} aria-hidden />
@@ -55,31 +55,32 @@ export default function RoutesView({
         ))}
       </div>
 
-      <p className="mt-6 text-[17px] leading-[1.47] tracking-[-0.374px] text-black/80">
+      <p className="mt-6 text-[18px] leading-[1.4] text-[#62625b]">
         {weatherAdvice(weather)}
       </p>
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2">
+      <div className="masonry mt-8 sm:columns-2">
         {curated.map((a) => (
-          <article key={a.id} className="rounded-[28px] bg-white p-7">
+          <article
+            key={a.id}
+            className="rounded-[20px] bg-white p-6 ring-1 ring-[#e5e5e0]"
+          >
             <div className="flex items-center justify-between gap-3">
-              <p className="text-[12px] font-semibold uppercase leading-[1.33] tracking-[0.06em] text-black/48">
+              <span className="inline-block rounded-full bg-[#e0e0d9] px-2.5 py-1 text-[12px] font-medium text-[#211922]">
                 {a.type === "indoor" ? "실내" : "야외"}
-              </p>
+              </span>
               {bad && a.weatherProof ? (
-                <span className="inline-flex items-center gap-1 text-[12px] font-semibold uppercase tracking-[0.04em] text-[#1d8a3f]">
+                <span className="inline-flex items-center gap-1 text-[12px] font-bold text-[#103c25]">
                   <Check size={14} aria-hidden />
                   악천후 추천
                 </span>
               ) : null}
             </div>
-            <h3 className="mt-1 text-[21px] font-bold leading-[1.19] tracking-[0.231px] text-[#1d1d1f]">
+            <h3 className="mt-2 text-[20px] font-bold leading-tight tracking-[-0.5px] text-[#211922]">
               {a.name}
             </h3>
-            <p className="mt-0.5 text-[14px] leading-[1.29] tracking-[-0.224px] text-black/48">
-              {a.category}
-            </p>
-            <p className="mt-3 text-[17px] leading-[1.47] tracking-[-0.374px] text-black/80">
+            <p className="mt-0.5 text-[12px] text-[#62625b]">{a.category}</p>
+            <p className="mt-3 text-[16px] leading-[1.4] text-[#62625b]">
               {a.description}
             </p>
           </article>

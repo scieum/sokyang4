@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { UtensilsCrossed, CloudSun, ChevronRight } from "lucide-react";
+import { UtensilsCrossed, CloudSun, ArrowRight } from "lucide-react";
 
 const features = [
   {
@@ -26,80 +26,79 @@ const principles = [
 
 export default function Home() {
   return (
-    <main>
-      {/* Hero — 블랙 섹션 (immersive) */}
-      <section className="bg-black text-white">
-        <div className="mx-auto flex max-w-[980px] flex-col items-center px-5 py-28 text-center">
-          <p className="text-[19px] font-semibold tracking-[-0.374px] text-[#2997ff]">
-            Sokcho Insight
-          </p>
-          <h1 className="mt-3 text-[clamp(40px,8vw,56px)] font-semibold leading-[1.07] tracking-[-0.28px]">
-            광고 없는 진짜 속초를 만나다
-          </h1>
-          <p className="mt-5 max-w-[640px] text-[21px] font-normal leading-[1.19] tracking-[0.231px] text-white/80">
-            오염된 여행 정보 대신, 교차 검증된 데이터로 현지인 가성비와 공신력
-            있는 정보를 제공합니다.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/restaurants"
-              className="rounded-[980px] bg-[#0071e3] px-[21px] py-[11px] text-[17px] font-normal text-white transition hover:bg-[#0077ed]"
-            >
-              맛집 큐레이션
-            </Link>
-            <Link
-              href="/routes"
-              className="inline-flex items-center gap-1 text-[17px] font-normal text-[#2997ff] hover:underline"
-            >
-              기상 동선 보기
-              <ChevronRight size={18} aria-hidden />
-            </Link>
-          </div>
+    <main className="bg-white">
+      {/* 히어로 — 화이트 캔버스, 70px 플럼 블랙 헤드라인 */}
+      <section className="mx-auto max-w-[1100px] px-5 py-24 text-center">
+        <p className="text-[16px] font-bold text-[#e60023]">속초 인사이트</p>
+        <h1 className="mx-auto mt-4 max-w-[860px] text-[clamp(44px,8vw,70px)] font-semibold leading-[1.05] tracking-[-1.2px] text-[#211922]">
+          광고 없는 진짜 속초를 만나다
+        </h1>
+        <p className="mx-auto mt-6 max-w-[600px] text-[18px] leading-[1.4] text-[#62625b]">
+          오염된 여행 정보 대신, 교차 검증된 데이터로 현지인 가성비와 공신력 있는
+          정보를 제공합니다.
+        </p>
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <Link
+            href="/restaurants"
+            className="rounded-2xl bg-[#e60023] px-6 py-3 text-[16px] font-bold text-white transition hover:bg-[#ad081b]"
+          >
+            맛집 큐레이션
+          </Link>
+          <Link
+            href="/routes"
+            className="rounded-2xl bg-[#e5e5e0] px-6 py-3 text-[16px] font-bold text-[#211922] transition hover:bg-[#d9d9d2]"
+          >
+            기상 동선 보기
+          </Link>
         </div>
       </section>
 
-      {/* Features — 라이트그레이 섹션 (informational) */}
-      <section className="bg-[#f5f5f7]">
-        <div className="mx-auto max-w-[980px] px-5 py-20">
+      {/* 피처 — 따뜻한 포그 카드 (20px 라운드) */}
+      <section className="bg-[#f6f6f3]">
+        <div className="mx-auto max-w-[1100px] px-5 py-20">
           <div className="grid gap-5 sm:grid-cols-2">
             {features.map(({ href, Icon, title, desc, cta }) => (
-              <div
+              <Link
                 key={href}
-                className="flex flex-col rounded-[28px] bg-white p-7"
+                href={href}
+                className="group flex flex-col rounded-[28px] bg-white p-8 transition hover:bg-[#fcfcfa]"
               >
-                <Icon size={32} className="text-[#0071e3]" aria-hidden />
-                <h2 className="mt-4 text-[28px] font-semibold leading-[1.14] tracking-[0.196px] text-[#1d1d1f]">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#e0e0d9] text-[#211922]">
+                  <Icon size={24} aria-hidden />
+                </span>
+                <h2 className="mt-5 text-[28px] font-bold leading-tight tracking-[-1.2px] text-[#211922]">
                   {title}
                 </h2>
-                <p className="mt-3 text-[17px] leading-[1.47] tracking-[-0.374px] text-black/80">
+                <p className="mt-3 text-[16px] leading-[1.4] text-[#62625b]">
                   {desc}
                 </p>
-                <Link
-                  href={href}
-                  className="mt-5 inline-flex items-center gap-1 text-[14px] tracking-[-0.224px] text-[#0066cc] hover:underline"
-                >
+                <span className="mt-5 inline-flex items-center gap-1 text-[14px] font-bold text-[#e60023]">
                   {cta}
-                  <ChevronRight size={16} aria-hidden />
-                </Link>
-              </div>
+                  <ArrowRight
+                    size={16}
+                    aria-hidden
+                    className="transition group-hover:translate-x-0.5"
+                  />
+                </span>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Principles — 흰 섹션 */}
+      {/* 원칙 — 화이트 섹션, 워밍 카드 */}
       <section className="bg-white">
-        <div className="mx-auto max-w-[980px] px-5 py-20">
-          <h2 className="text-center text-[40px] font-semibold leading-[1.1] tracking-[-0.28px] text-[#1d1d1f]">
+        <div className="mx-auto max-w-[1100px] px-5 py-20">
+          <h2 className="text-center text-[28px] font-bold tracking-[-1.2px] text-[#211922]">
             데이터 무결성
           </h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
             {principles.map((p) => (
-              <div key={p.label} className="rounded-[28px] bg-[#f5f5f7] p-7">
-                <p className="text-[21px] font-semibold leading-[1.19] tracking-[0.231px] text-[#1d1d1f]">
+              <div key={p.label} className="rounded-[20px] bg-[#f6f6f3] p-7">
+                <p className="text-[18px] font-bold text-[#211922]">
                   {p.label}
                 </p>
-                <p className="mt-2 text-[14px] leading-[1.29] tracking-[-0.224px] text-black/80">
+                <p className="mt-2 text-[14px] leading-[1.5] text-[#62625b]">
                   {p.value}
                 </p>
               </div>

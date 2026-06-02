@@ -16,29 +16,29 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className="min-h-screen bg-white text-[#1d1d1f]">
-        {/* Global Nav — Translucent Fog (HIG) */}
-        <header className="sticky top-0 z-50 border-b border-black/5 bg-[rgba(250,250,252,0.8)] [backdrop-filter:saturate(180%)_blur(20px)]">
-          <nav className="mx-auto flex h-12 max-w-[980px] items-center justify-between px-5">
+      <body className="min-h-screen bg-white text-[#211922]">
+        {/* 클린 헤더 — 화이트 캔버스 + Pinterest Red 액센트 */}
+        <header className="sticky top-0 z-50 bg-white/95 backdrop-blur">
+          <nav className="mx-auto flex h-16 max-w-[1100px] items-center justify-between px-5">
             <Link
               href="/"
-              className="text-[17px] font-semibold tracking-[-0.374px] text-black/80 transition hover:text-black"
+              className="flex items-center gap-2 text-[20px] font-bold tracking-[-0.5px] text-[#e60023]"
             >
               Sokcho Insight
             </Link>
             <div className="flex items-center gap-1">
               <Link
                 href="/restaurants"
-                className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-[14px] font-normal tracking-[-0.224px] text-black/80 transition hover:text-black"
+                className="flex items-center gap-1.5 rounded-2xl px-4 py-2 text-[16px] font-medium text-[#211922] transition hover:bg-[#e5e5e0]"
               >
-                <UtensilsCrossed size={16} aria-hidden />
+                <UtensilsCrossed size={18} aria-hidden />
                 맛집 큐레이션
               </Link>
               <Link
                 href="/routes"
-                className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-[14px] font-normal tracking-[-0.224px] text-black/80 transition hover:text-black"
+                className="flex items-center gap-1.5 rounded-2xl px-4 py-2 text-[16px] font-medium text-[#211922] transition hover:bg-[#e5e5e0]"
               >
-                <CloudSun size={16} aria-hidden />
+                <CloudSun size={18} aria-hidden />
                 기상 동선
               </Link>
             </div>
@@ -47,11 +47,15 @@ export default function RootLayout({
 
         {children}
 
-        <footer className="bg-[#f5f5f7] py-8">
-          <div className="mx-auto max-w-[980px] px-5">
-            <p className="text-[12px] leading-[1.33] tracking-[-0.12px] text-black/48">
-              Sokcho Insight · 데이터 무결성(Data Integrity)을 지향하는 속초 여행
-              큐레이션 · MVP (목업 데이터)
+        {/* 다크 풀-위드 푸터 (#33332e) */}
+        <footer className="bg-[#33332e] py-10">
+          <div className="mx-auto max-w-[1100px] px-5">
+            <p className="text-[20px] font-bold tracking-[-0.5px] text-white">
+              Sokcho Insight
+            </p>
+            <p className="mt-2 text-[12px] leading-[1.5] text-[#91918c]">
+              데이터 무결성(Data Integrity)을 지향하는 속초 여행 큐레이션 · MVP
+              (목업 데이터)
             </p>
           </div>
         </footer>

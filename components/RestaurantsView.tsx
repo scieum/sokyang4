@@ -41,32 +41,32 @@ export default function RestaurantsView({
           <button
             key={opt.value}
             onClick={() => setTheme(opt.value)}
-            className={`rounded-[980px] px-4 py-2 text-[14px] tracking-[-0.224px] transition ${
+            className={`rounded-2xl px-4 py-2 text-[14px] font-bold transition ${
               theme === opt.value
-                ? "bg-[#0071e3] text-white"
-                : "bg-white text-black/80 hover:bg-black/[0.03]"
+                ? "bg-[#e60023] text-white"
+                : "bg-[#e5e5e0] text-[#211922] hover:bg-[#d9d9d2]"
             }`}
           >
             {opt.label}
           </button>
         ))}
-        <label className="ml-auto inline-flex cursor-pointer items-center gap-2 text-[14px] tracking-[-0.224px] text-black/80">
+        <label className="ml-auto inline-flex cursor-pointer items-center gap-2 text-[14px] font-medium text-[#211922]">
           <input
             type="checkbox"
             checked={hideAds}
             onChange={(e) => setHideAds(e.target.checked)}
-            className="h-4 w-4 rounded accent-[#0071e3]"
+            className="h-4 w-4 rounded accent-[#e60023]"
           />
           광고 의심 숨기기
         </label>
       </div>
 
       {filtered.length === 0 ? (
-        <p className="mt-10 text-[17px] leading-[1.47] tracking-[-0.374px] text-black/48">
-          조건에 맞는 맛집이 없습니다.
+        <p className="mt-10 text-[16px] text-[#62625b]">
+          조건에 맞는 맛집이 없습니다. 다른 필터를 시도해 보세요.
         </p>
       ) : (
-        <div className="mt-8 grid gap-5 sm:grid-cols-2">
+        <div className="masonry mt-8 sm:columns-2">
           {filtered.map((r) => (
             <RestaurantCard key={r.id} r={r} />
           ))}
