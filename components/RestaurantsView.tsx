@@ -35,38 +35,38 @@ export default function RestaurantsView({
   }, [restaurants, theme, hideAds]);
 
   return (
-    <div className="space-y-6">
+    <div>
       <div className="flex flex-wrap items-center gap-2">
         {THEME_OPTIONS.map((opt) => (
           <button
             key={opt.value}
             onClick={() => setTheme(opt.value)}
-            className={`rounded-full px-3 py-1.5 text-sm font-medium transition ${
+            className={`rounded-[980px] px-4 py-2 text-[14px] tracking-[-0.224px] transition ${
               theme === opt.value
-                ? "bg-sky-600 text-white"
-                : "bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50"
+                ? "bg-[#0071e3] text-white"
+                : "bg-white text-black/80 hover:bg-black/[0.03]"
             }`}
           >
             {opt.label}
           </button>
         ))}
-        <label className="ml-auto flex cursor-pointer items-center gap-2 text-sm text-slate-600">
+        <label className="ml-auto inline-flex cursor-pointer items-center gap-2 text-[14px] tracking-[-0.224px] text-black/80">
           <input
             type="checkbox"
             checked={hideAds}
             onChange={(e) => setHideAds(e.target.checked)}
-            className="h-4 w-4 rounded border-slate-300 accent-sky-600"
+            className="h-4 w-4 rounded accent-[#0071e3]"
           />
           광고 의심 숨기기
         </label>
       </div>
 
       {filtered.length === 0 ? (
-        <p className="rounded-lg border border-dashed border-slate-300 p-8 text-center text-sm text-slate-400">
+        <p className="mt-10 text-[17px] leading-[1.47] tracking-[-0.374px] text-black/48">
           조건에 맞는 맛집이 없습니다.
         </p>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2">
           {filtered.map((r) => (
             <RestaurantCard key={r.id} r={r} />
           ))}

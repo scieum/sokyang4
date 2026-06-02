@@ -1,6 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import {
+  Sun,
+  CloudRain,
+  Wind,
+  Snowflake,
+  Check,
+  type LucideIcon,
+} from "lucide-react";
 import { curateRoute, isBadWeather, weatherAdvice } from "@/lib/weather";
 import {
   WEATHER_LABEL,
@@ -8,11 +16,11 @@ import {
   type WeatherCondition,
 } from "@/types";
 
-const WEATHER_OPTIONS: { value: WeatherCondition; emoji: string }[] = [
-  { value: "clear", emoji: "☀️" },
-  { value: "rain", emoji: "🌧️" },
-  { value: "wind", emoji: "💨" },
-  { value: "snow", emoji: "❄️" },
+const WEATHER_OPTIONS: { value: WeatherCondition; Icon: LucideIcon }[] = [
+  { value: "clear", Icon: Sun },
+  { value: "rain", Icon: CloudRain },
+  { value: "wind", Icon: Wind },
+  { value: "snow", Icon: Snowflake },
 ];
 
 export default function RoutesView({
@@ -29,61 +37,51 @@ export default function RoutesView({
   const bad = isBadWeather(weather);
 
   return (
-    <div className="space-y-6">
+    <div>
       <div className="flex flex-wrap gap-2">
-        {WEATHER_OPTIONS.map((opt) => (
+        {WEATHER_OPTIONS.map(({ value, Icon }) => (
           <button
-            key={opt.value}
-            onClick={() => setWeather(opt.value)}
-            className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition ${
-              weather === opt.value
-                ? "bg-sky-600 text-white"
-                : "bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50"
+            key={value}
+            onClick={() => setWeather(value)}
+            className={`inline-flex items-center gap-2 rounded-[980px] px-4 py-2 text-[14px] tracking-[-0.224px] transition ${
+              weather === value
+                ? "bg-[#0071e3] text-white"
+                : "bg-white text-black/80 hover:bg-black/[0.03]"
             }`}
           >
-            <span>{opt.emoji}</span>
-            {WEATHER_LABEL[opt.value]}
+            <Icon size={16} aria-hidden />
+            {WEATHER_LABEL[value]}
           </button>
         ))}
       </div>
 
-      <div
-        className={`rounded-lg border p-4 text-sm ${
-          bad
-            ? "border-amber-200 bg-amber-50 text-amber-800"
-            : "border-sky-200 bg-sky-50 text-sky-800"
-        }`}
-      >
+      <p className="mt-6 text-[17px] leading-[1.47] tracking-[-0.374px] text-black/80">
         {weatherAdvice(weather)}
-      </div>
+      </p>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="mt-8 grid gap-5 sm:grid-cols-2">
         {curated.map((a) => (
-          <article
-            key={a.id}
-            className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold text-slate-900">{a.name}</h3>
-              <span
-                className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-                  a.type === "indoor"
-                    ? "bg-violet-100 text-violet-700"
-                    : "bg-green-100 text-green-700"
-                }`}
-              >
+          <article key={a.id} className="rounded-[28px] bg-white p-7">
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-[12px] font-semibold uppercase leading-[1.33] tracking-[0.06em] text-black/48">
                 {a.type === "indoor" ? "실내" : "야외"}
-              </span>
+              </p>
+              {bad && a.weatherProof ? (
+                <span className="inline-flex items-center gap-1 text-[12px] font-semibold uppercase tracking-[0.04em] text-[#1d8a3f]">
+                  <Check size={14} aria-hidden />
+                  악천후 추천
+                </span>
+              ) : null}
             </div>
-            <p className="mt-0.5 text-xs text-slate-500">{a.category}</p>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+            <h3 className="mt-1 text-[21px] font-bold leading-[1.19] tracking-[0.231px] text-[#1d1d1f]">
+              {a.name}
+            </h3>
+            <p className="mt-0.5 text-[14px] leading-[1.29] tracking-[-0.224px] text-black/48">
+              {a.category}
+            </p>
+            <p className="mt-3 text-[17px] leading-[1.47] tracking-[-0.374px] text-black/80">
               {a.description}
             </p>
-            {bad && a.weatherProof && (
-              <p className="mt-3 text-xs font-medium text-amber-700">
-                ✓ 악천후에도 방문하기 좋은 곳
-              </p>
-            )}
           </article>
         ))}
       </div>

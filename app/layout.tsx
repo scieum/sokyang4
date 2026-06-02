@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { UtensilsCrossed, CloudSun } from "lucide-react";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,37 +16,44 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className="min-h-screen antialiased">
-        <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/80 backdrop-blur">
-          <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-lg font-extrabold tracking-tight text-sky-700">
-                Sokcho Insight
-              </span>
-              <span className="hidden text-xs text-slate-400 sm:inline">
-                광고 없는 진짜 속초
-              </span>
+      <body className="min-h-screen bg-white text-[#1d1d1f]">
+        {/* Global Nav — Translucent Fog (HIG) */}
+        <header className="sticky top-0 z-50 border-b border-black/5 bg-[rgba(250,250,252,0.8)] [backdrop-filter:saturate(180%)_blur(20px)]">
+          <nav className="mx-auto flex h-12 max-w-[980px] items-center justify-between px-5">
+            <Link
+              href="/"
+              className="text-[17px] font-semibold tracking-[-0.374px] text-black/80 transition hover:text-black"
+            >
+              Sokcho Insight
             </Link>
-            <div className="flex items-center gap-1 text-sm font-medium">
+            <div className="flex items-center gap-1">
               <Link
                 href="/restaurants"
-                className="rounded-md px-3 py-1.5 text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+                className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-[14px] font-normal tracking-[-0.224px] text-black/80 transition hover:text-black"
               >
+                <UtensilsCrossed size={16} aria-hidden />
                 맛집 큐레이션
               </Link>
               <Link
                 href="/routes"
-                className="rounded-md px-3 py-1.5 text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+                className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-[14px] font-normal tracking-[-0.224px] text-black/80 transition hover:text-black"
               >
+                <CloudSun size={16} aria-hidden />
                 기상 동선
               </Link>
             </div>
           </nav>
         </header>
-        <main className="mx-auto max-w-5xl px-4 py-8">{children}</main>
-        <footer className="border-t border-slate-200 py-6 text-center text-xs text-slate-400">
-          Sokcho Insight · 데이터 무결성(Data Integrity)을 지향하는 속초 여행
-          큐레이션 · MVP (목업 데이터)
+
+        {children}
+
+        <footer className="bg-[#f5f5f7] py-8">
+          <div className="mx-auto max-w-[980px] px-5">
+            <p className="text-[12px] leading-[1.33] tracking-[-0.12px] text-black/48">
+              Sokcho Insight · 데이터 무결성(Data Integrity)을 지향하는 속초 여행
+              큐레이션 · MVP (목업 데이터)
+            </p>
+          </div>
         </footer>
       </body>
     </html>
