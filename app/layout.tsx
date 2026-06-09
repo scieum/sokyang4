@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { UtensilsCrossed, CloudSun } from "lucide-react";
+import AdSlot from "@/components/AdSlot";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -46,6 +47,8 @@ export default function RootLayout({
         </header>
 
         {children}
+
+        <AdSlot />
 
         {/* 다크 풀-위드 푸터 (#1C2B33) + 제작 정보 */}
         <footer className="bg-[#1C2B33] py-10">
