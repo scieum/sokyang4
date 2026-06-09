@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import RestaurantCard from "@/components/RestaurantCard";
+import RestaurantGallery from "@/components/RestaurantGallery";
 import {
   THEME_LABEL,
   type RestaurantTheme,
@@ -25,6 +26,7 @@ export default function RestaurantsView({
 }) {
   const [theme, setTheme] = useState<ThemeFilter>("all");
   const [hideAds, setHideAds] = useState(true);
+  const [selected, setSelected] = useState<ScoredRestaurant | null>(null);
 
   const filtered = useMemo(() => {
     return restaurants.filter((r) => {
@@ -68,10 +70,21 @@ export default function RestaurantsView({
       ) : (
         <div className="masonry mt-8 sm:columns-2">
           {filtered.map((r) => (
-            <RestaurantCard key={r.id} r={r} />
+            <RestaurantCard
+              key={r.id}
+              r={r}
+              onOpenGallery={() => setSelected(r)}
+            />
           ))}
         </div>
       )}
+
+      {selected ? (
+        <RestaurantGallery
+          restaurant={selected}
+          onClose={() => setSelected(null)}
+        />
+      ) : null}
     </div>
   );
 }

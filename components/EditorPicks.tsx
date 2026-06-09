@@ -1,5 +1,5 @@
 import { Quote, Star } from "lucide-react";
-import NaverMapLink from "@/components/NaverMapLink";
+import MapLinks from "@/components/MapLinks";
 import { THEME_LABEL, type Restaurant } from "@/types";
 
 /**
@@ -55,7 +55,7 @@ export default function EditorPicks({ picks }: { picks: Restaurant[] }) {
             ) : null}
 
             <div className="mt-auto pt-5">
-              <NaverMapLink name={r.name} address={r.address} />
+              <MapLinks name={r.name} />
             </div>
           </article>
         ))}

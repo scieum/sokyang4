@@ -1,5 +1,7 @@
-import { AlertTriangle, Award, MapPin } from "lucide-react";
-import NaverMapLink from "@/components/NaverMapLink";
+"use client";
+
+import { AlertTriangle, Award, Camera, MapPin } from "lucide-react";
+import MapLinks from "@/components/MapLinks";
 import { THEME_LABEL, type ScoredRestaurant } from "@/types";
 
 const TRUST_DOT: Record<ScoredRestaurant["trustLevel"], string> = {
@@ -14,9 +16,36 @@ const TRUST_LABEL: Record<ScoredRestaurant["trustLevel"], string> = {
   low: "신뢰 낮음",
 };
 
-export default function RestaurantCard({ r }: { r: ScoredRestaurant }) {
+export default function RestaurantCard({
+  r,
+  onOpenGallery,
+}: {
+  r: ScoredRestaurant;
+  onOpenGallery?: () => void;
+}) {
+  const clickable = Boolean(onOpenGallery);
   return (
-    <article className="flex flex-col rounded-[20px] bg-white p-6 ring-1 ring-[#e5e5e0]">
+    <article
+      className={`flex flex-col rounded-[20px] bg-white p-6 ring-1 ring-[#e5e5e0] ${
+        clickable
+          ? "cursor-pointer transition hover:bg-[#fcfcfa] hover:ring-[#d4d4cc]"
+          : ""
+      }`}
+      onClick={onOpenGallery}
+      role={clickable ? "button" : undefined}
+      tabIndex={clickable ? 0 : undefined}
+      onKeyDown={
+        clickable
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onOpenGallery?.();
+              }
+            }
+          : undefined
+      }
+      aria-label={clickable ? `${r.name} 사진 보기` : undefined}
+    >
       <div className="flex items-start justify-between gap-4">
         <div>
           <span className="inline-block rounded-full bg-[#e0e0d9] px-2.5 py-1 text-[12px] font-medium text-[#211922]">
@@ -99,9 +128,16 @@ export default function RestaurantCard({ r }: { r: ScoredRestaurant }) {
         {r.priceRange} · {r.signatureMenu}
       </div>
 
-      <div className="mt-4">
-        <NaverMapLink name={r.name} address={r.address} />
+      <div className="mt-4" onClick={(e) => e.stopPropagation()}>
+        <MapLinks name={r.name} />
       </div>
+
+      {clickable ? (
+        <div className="mt-4 inline-flex items-center gap-1.5 text-[12px] font-bold text-[#e60023]">
+          <Camera size={14} aria-hidden />
+          카드를 누르면 사진 갤러리가 열립니다
+        </div>
+      ) : null}
     </article>
   );
 }

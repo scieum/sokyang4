@@ -44,7 +44,24 @@ export interface Restaurant {
   editorPick?: boolean;
   /** 제작자 추천 코멘트 (editorPick일 때) */
   editorNote?: string;
+  /** 갤러리 사진 (카테고리별 이미지 URL). 미설정 시 이미지 검색 링크로 폴백 */
+  photos?: RestaurantPhotos;
 }
+
+/** 맛집 사진 카테고리별 이미지 URL 모음 */
+export interface RestaurantPhotos {
+  menu: string[]; // 대표 메뉴
+  interior: string[]; // 인테리어
+  exterior: string[]; // 외관
+}
+
+export type PhotoCategory = keyof RestaurantPhotos;
+
+export const PHOTO_CATEGORY_LABEL: Record<PhotoCategory, string> = {
+  menu: "대표 메뉴",
+  interior: "인테리어",
+  exterior: "외관",
+};
 
 export type TrustLevel = "high" | "medium" | "low";
 
