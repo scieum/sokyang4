@@ -83,3 +83,15 @@ export interface Attraction {
   lat: number;
   lng: number;
 }
+
+/**
+ * 인스타그램 게시물 (Instagram Graph API – Business Discovery)
+ * 빌드 시점에 data/instagram.json으로 수집된다. 토큰 미설정 시 빈 배열.
+ */
+export interface InstagramPost {
+  id: string;
+  caption: string;
+  permalink: string;
+  mediaType: string;
+  timestamp: string; // ISO8601
+}

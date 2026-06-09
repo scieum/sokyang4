@@ -3,7 +3,8 @@
 
 import restaurantsJson from "@/data/restaurants.json";
 import attractionsJson from "@/data/attractions.json";
-import type { Attraction, Restaurant } from "@/types";
+import instagramJson from "@/data/instagram.json";
+import type { Attraction, InstagramPost, Restaurant } from "@/types";
 
 export function getRestaurants(): Restaurant[] {
   return restaurantsJson as Restaurant[];
@@ -16,4 +17,9 @@ export function getEditorPicks(): Restaurant[] {
 
 export function getAttractions(): Attraction[] {
   return attractionsJson as Attraction[];
+}
+
+/** 인스타그램 @i_love_sokcho 최근 1년 게시물 (빌드 시점 수집, 미설정 시 빈 배열) */
+export function getInstagramPosts(): InstagramPost[] {
+  return instagramJson as InstagramPost[];
 }

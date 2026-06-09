@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/fetch-instagram.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "fetch:instagram": "node scripts/fetch-instagram.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.17.0",

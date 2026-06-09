@@ -1,6 +1,11 @@
 import EditorPicks from "@/components/EditorPicks";
+import InstagramFeed from "@/components/InstagramFeed";
 import RestaurantsView from "@/components/RestaurantsView";
-import { getEditorPicks, getRestaurants } from "@/lib/data";
+import {
+  getEditorPicks,
+  getInstagramPosts,
+  getRestaurants,
+} from "@/lib/data";
 import { scoreAndRank } from "@/lib/scoring/score";
 
 export const metadata = {
@@ -10,6 +15,7 @@ export const metadata = {
 export default function RestaurantsPage() {
   const scored = scoreAndRank(getRestaurants());
   const picks = getEditorPicks();
+  const instagramPosts = getInstagramPosts();
 
   return (
     <main className="bg-white">
@@ -25,6 +31,8 @@ export default function RestaurantsPage() {
         </header>
 
         <EditorPicks picks={picks} />
+
+        <InstagramFeed posts={instagramPosts} />
 
         <div className="mt-14">
           <h2 className="mb-6 text-[24px] font-bold tracking-[-1.2px] text-[#211922]">
