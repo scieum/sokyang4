@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { X, ExternalLink, Info } from "lucide-react";
 import { googleImageSearchUrl, naverImageSearchUrl } from "@/lib/naver";
-import { representativePhotos } from "@/lib/photos";
+import { assetPath, representativePhotos } from "@/lib/photos";
 import {
   PHOTO_CATEGORY_LABEL,
   type PhotoCategory,
@@ -14,9 +14,11 @@ const CATEGORIES: PhotoCategory[] = ["menu", "interior", "exterior"];
 
 export default function RestaurantGallery({
   restaurant,
+  realPhotos = [],
   onClose,
 }: {
   restaurant: ScoredRestaurant;
+  realPhotos?: string[];
   onClose: () => void;
 }) {
   const [tab, setTab] = useState<PhotoCategory>("menu");
@@ -34,11 +36,14 @@ export default function RestaurantGallery({
     };
   }, [onClose]);
 
+  const hasReal = realPhotos.length > 0;
   const curated = restaurant.photos?.[tab] ?? [];
-  const isRepresentative = curated.length === 0;
-  const photos = isRepresentative
-    ? representativePhotos(restaurant, tab)
-    : curated;
+  const isRepresentative = !hasReal && curated.length === 0;
+  const photos = hasReal
+    ? realPhotos.map(assetPath)
+    : isRepresentative
+      ? representativePhotos(restaurant, tab)
+      : curated;
   const query = `${restaurant.name} ${PHOTO_CATEGORY_LABEL[tab]}`;
 
   return (
@@ -72,25 +77,31 @@ export default function RestaurantGallery({
           </button>
         </div>
 
-        {/* 탭 (Segmented) */}
-        <div className="flex gap-2 px-6 pt-4">
-          {CATEGORIES.map((c) => (
-            <button
-              key={c}
-              onClick={() => setTab(c)}
-              className={`rounded-[8px] px-4 py-2 text-[14px] font-semibold transition ${
-                tab === c
-                  ? "bg-[#0064E0] text-white"
-                  : "bg-[#F0F2F5] text-[#65676B] hover:bg-[#E4E6EB]"
-              }`}
-            >
-              {PHOTO_CATEGORY_LABEL[c]}
-            </button>
-          ))}
-        </div>
+        {/* 카테고리 탭 — 실제 사진 모드에서는 숨김(구글 사진은 분류 정보 없음) */}
+        {!hasReal ? (
+          <div className="flex gap-2 px-6 pt-4">
+            {CATEGORIES.map((c) => (
+              <button
+                key={c}
+                onClick={() => setTab(c)}
+                className={`rounded-[8px] px-4 py-2 text-[14px] font-semibold transition ${
+                  tab === c
+                    ? "bg-[#0064E0] text-white"
+                    : "bg-[#F0F2F5] text-[#65676B] hover:bg-[#E4E6EB]"
+                }`}
+              >
+                {PHOTO_CATEGORY_LABEL[c]}
+              </button>
+            ))}
+          </div>
+        ) : null}
 
-        {/* 예시 이미지 안내 (간단 캡션) */}
-        {isRepresentative ? (
+        {/* 안내 캡션 */}
+        {hasReal ? (
+          <p className="mx-6 mt-4 text-[12px] text-[#8A8D91]">
+            사진 출처: Google
+          </p>
+        ) : isRepresentative ? (
           <p className="mx-6 mt-4 inline-flex items-center gap-1.5 text-[12px] text-[#8A8D91]">
             <Info size={13} className="shrink-0" aria-hidden />
             참고 이미지 · 실제 매장 사진은 아래 네이버·구글에서 확인
@@ -105,7 +116,7 @@ export default function RestaurantGallery({
               <img
                 key={i}
                 src={src}
-                alt={`${restaurant.name} ${PHOTO_CATEGORY_LABEL[tab]} ${i + 1}`}
+                alt={`${restaurant.name} 사진 ${i + 1}`}
                 loading="lazy"
                 className="aspect-square w-full rounded-[8px] bg-[#F0F2F5] object-cover"
               />

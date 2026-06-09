@@ -3,11 +3,14 @@
 import { useMemo, useState } from "react";
 import RestaurantCard from "@/components/RestaurantCard";
 import RestaurantGallery from "@/components/RestaurantGallery";
+import { getPlacePhotos } from "@/lib/data";
 import {
   THEME_LABEL,
   type RestaurantTheme,
   type ScoredRestaurant,
 } from "@/types";
+
+const PLACE_PHOTOS = getPlacePhotos();
 
 type ThemeFilter = RestaurantTheme | "all";
 
@@ -82,6 +85,7 @@ export default function RestaurantsView({
       {selected ? (
         <RestaurantGallery
           restaurant={selected}
+          realPhotos={PLACE_PHOTOS[selected.id] ?? []}
           onClose={() => setSelected(null)}
         />
       ) : null}

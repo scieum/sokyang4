@@ -4,6 +4,7 @@
 import restaurantsJson from "@/data/restaurants.json";
 import attractionsJson from "@/data/attractions.json";
 import instagramJson from "@/data/instagram.json";
+import placePhotosJson from "@/data/place-photos.json";
 import type { Attraction, InstagramPost, Restaurant } from "@/types";
 
 export function getRestaurants(): Restaurant[] {
@@ -22,4 +23,9 @@ export function getAttractions(): Attraction[] {
 /** 인스타그램 @i_love_sokcho 최근 1년 게시물 (빌드 시점 수집, 미설정 시 빈 배열) */
 export function getInstagramPosts(): InstagramPost[] {
   return instagramJson as InstagramPost[];
+}
+
+/** 맛집별 실제 사진 경로 (Google Places, 빌드 시점 수집; 미설정 시 빈 객체) */
+export function getPlacePhotos(): Record<string, string[]> {
+  return placePhotosJson as Record<string, string[]>;
 }

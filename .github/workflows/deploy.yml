@@ -39,11 +39,14 @@ jobs:
         run: npm run build
         env:
           GITHUB_PAGES: "true"
+          NEXT_PUBLIC_BASE_PATH: "/sokyang4"
           # 인스타그램 연동 (선택) — Repo Settings > Secrets 에 등록하면 활성화됨.
           # 미설정 시 prebuild 스크립트가 수집을 건너뛰고 빌드는 정상 진행.
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_TARGET_USERNAME: i_love_sokcho
+          # 맛집 실제 사진 (Google Places, 선택) — Secret 등록 시 활성화.
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

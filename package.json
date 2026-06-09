@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/fetch-instagram.mjs",
+    "prebuild": "node scripts/fetch-instagram.mjs && node scripts/fetch-photos.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "fetch:instagram": "node scripts/fetch-instagram.mjs"
+    "fetch:instagram": "node scripts/fetch-instagram.mjs",
+    "fetch:photos": "node scripts/fetch-photos.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.17.0",

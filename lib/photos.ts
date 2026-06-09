@@ -8,6 +8,12 @@
 
 import type { PhotoCategory, Restaurant } from "@/types";
 
+/** 정적 자산 경로에 basePath(예: GitHub Pages /sokyang4) 프리픽스를 붙인다. */
+export function assetPath(p: string): string {
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  return `${base}/${p.replace(/^\//, "")}`;
+}
+
 const COUNT = 6;
 
 const KEYWORDS: Record<PhotoCategory, string> = {
