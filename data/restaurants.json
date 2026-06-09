@@ -10,6 +10,8 @@
     "description": "현지인과 관광객 모두에게 사랑받는 물회 노포. 신선한 해산물 양이 푸짐하다.",
     "ratings": { "google": 4.4, "googleCount": 2100, "naver": 4.5, "naverCount": 3800 },
     "verification": { "yearsSelected": 6, "localFavorite": true },
+    "editorPick": true,
+    "editorNote": "관광객용 가게가 아니라 동네 사람들이 줄 서는 진짜 물회. 전복물회는 양과 신선도 모두 기대 이상이었습니다.",
     "lat": 38.2331,
     "lng": 128.5961
   },
@@ -66,6 +68,8 @@
     "description": "실향민 향토음식을 지켜온 노포. 오징어순대가 대표 메뉴.",
     "ratings": { "google": 4.3, "googleCount": 900, "naver": 4.4, "naverCount": 1400 },
     "verification": { "blueRibbon": 1, "yearsSelected": 5, "localFavorite": true },
+    "editorPick": true,
+    "editorNote": "속초에서만 맛볼 수 있는 실향민 향토음식. 오징어순대 한 접시면 이 도시의 역사가 읽힙니다. 광고로는 절대 못 만나는 곳.",
     "lat": 38.2065,
     "lng": 128.5887
   },
@@ -80,6 +84,8 @@
     "description": "설악산 자락 학사평 두부마을의 담백한 손두부. 웰니스 한 끼로 적합.",
     "ratings": { "google": 4.2, "googleCount": 1100, "naver": 4.3, "naverCount": 1700 },
     "verification": { "localFavorite": true },
+    "editorPick": true,
+    "editorNote": "설악산 다녀오는 길에 들르기 딱 좋은 담백한 손두부 한 상. 자극적이지 않아 여행 중 속을 달래기에 최고였습니다.",
     "lat": 38.1719,
     "lng": 128.5169
   },

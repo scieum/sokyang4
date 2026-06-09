@@ -1,4 +1,5 @@
 import { AlertTriangle, Award, MapPin } from "lucide-react";
+import NaverMapLink from "@/components/NaverMapLink";
 import { THEME_LABEL, type ScoredRestaurant } from "@/types";
 
 const TRUST_DOT: Record<ScoredRestaurant["trustLevel"], string> = {
@@ -96,6 +97,10 @@ export default function RestaurantCard({ r }: { r: ScoredRestaurant }) {
       </div>
       <div className="mt-1 text-[12px] text-[#91918c]">
         {r.priceRange} · {r.signatureMenu}
+      </div>
+
+      <div className="mt-4">
+        <NaverMapLink name={r.name} address={r.address} />
       </div>
     </article>
   );

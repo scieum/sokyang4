@@ -1,5 +1,6 @@
+import EditorPicks from "@/components/EditorPicks";
 import RestaurantsView from "@/components/RestaurantsView";
-import { getRestaurants } from "@/lib/data";
+import { getEditorPicks, getRestaurants } from "@/lib/data";
 import { scoreAndRank } from "@/lib/scoring/score";
 
 export const metadata = {
@@ -8,6 +9,7 @@ export const metadata = {
 
 export default function RestaurantsPage() {
   const scored = scoreAndRank(getRestaurants());
+  const picks = getEditorPicks();
 
   return (
     <main className="bg-white">
@@ -21,7 +23,15 @@ export default function RestaurantsPage() {
             필터링 순으로 산출한 인사이트 점수 순 정렬입니다.
           </p>
         </header>
-        <RestaurantsView restaurants={scored} />
+
+        <EditorPicks picks={picks} />
+
+        <div className="mt-14">
+          <h2 className="mb-6 text-[24px] font-bold tracking-[-1.2px] text-[#211922]">
+            전체 큐레이션
+          </h2>
+          <RestaurantsView restaurants={scored} />
+        </div>
       </div>
     </main>
   );

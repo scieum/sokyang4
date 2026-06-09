@@ -9,6 +9,11 @@ export function getRestaurants(): Restaurant[] {
   return restaurantsJson as Restaurant[];
 }
 
+/** 제작자(에디터)가 직접 추천한 맛집 목록 — 알고리즘 점수와 별개의 큐레이션 */
+export function getEditorPicks(): Restaurant[] {
+  return getRestaurants().filter((r) => r.editorPick);
+}
+
 export function getAttractions(): Attraction[] {
   return attractionsJson as Attraction[];
 }

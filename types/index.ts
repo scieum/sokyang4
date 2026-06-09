@@ -40,6 +40,10 @@ export interface Restaurant {
   verification: Verification;
   lat: number;
   lng: number;
+  /** 제작자(에디터) 추천 여부 — 알고리즘 점수와 별개의 큐레이션 */
+  editorPick?: boolean;
+  /** 제작자 추천 코멘트 (editorPick일 때) */
+  editorNote?: string;
 }
 
 export type TrustLevel = "high" | "medium" | "low";
