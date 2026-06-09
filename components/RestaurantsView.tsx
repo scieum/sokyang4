@@ -43,28 +43,28 @@ export default function RestaurantsView({
           <button
             key={opt.value}
             onClick={() => setTheme(opt.value)}
-            className={`rounded-2xl px-4 py-2 text-[14px] font-bold transition ${
+            className={`rounded-[8px] px-4 py-2 text-[14px] font-semibold transition ${
               theme === opt.value
-                ? "bg-[#e60023] text-white"
-                : "bg-[#e5e5e0] text-[#211922] hover:bg-[#d9d9d2]"
+                ? "bg-[#0064E0] text-white"
+                : "bg-[#F0F2F5] text-[#65676B] hover:bg-[#E4E6EB]"
             }`}
           >
             {opt.label}
           </button>
         ))}
-        <label className="ml-auto inline-flex cursor-pointer items-center gap-2 text-[14px] font-medium text-[#211922]">
+        <label className="ml-auto inline-flex cursor-pointer items-center gap-2 text-[14px] font-medium text-[#1C2B33]">
           <input
             type="checkbox"
             checked={hideAds}
             onChange={(e) => setHideAds(e.target.checked)}
-            className="h-4 w-4 rounded accent-[#e60023]"
+            className="h-4 w-4 rounded accent-[#0064E0]"
           />
           광고 의심 숨기기
         </label>
       </div>
 
       {filtered.length === 0 ? (
-        <p className="mt-10 text-[16px] text-[#62625b]">
+        <p className="mt-10 text-[15px] text-[#8A8D91]">
           조건에 맞는 맛집이 없습니다. 다른 필터를 시도해 보세요.
         </p>
       ) : (

@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, ExternalLink, ImageOff } from "lucide-react";
+import { X, ExternalLink, Info } from "lucide-react";
 import { googleImageSearchUrl, naverImageSearchUrl } from "@/lib/naver";
+import { representativePhotos } from "@/lib/photos";
 import {
   PHOTO_CATEGORY_LABEL,
   type PhotoCategory,
@@ -20,7 +21,6 @@ export default function RestaurantGallery({
 }) {
   const [tab, setTab] = useState<PhotoCategory>("menu");
 
-  // ESC 닫기 + 바디 스크롤 잠금
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -34,50 +34,54 @@ export default function RestaurantGallery({
     };
   }, [onClose]);
 
-  const photos = restaurant.photos?.[tab] ?? [];
+  const curated = restaurant.photos?.[tab] ?? [];
+  const isRepresentative = curated.length === 0;
+  const photos = isRepresentative
+    ? representativePhotos(restaurant, tab)
+    : curated;
   const query = `${restaurant.name} ${PHOTO_CATEGORY_LABEL[tab]}`;
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[rgba(28,43,51,0.6)] p-4"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label={`${restaurant.name} 사진`}
     >
       <div
-        className="flex max-h-[88vh] w-full max-w-[860px] flex-col overflow-hidden rounded-[28px] bg-white"
+        className="flex max-h-[88vh] w-full max-w-[860px] flex-col overflow-hidden rounded-[12px] bg-white shadow-[0_12px_28px_rgba(28,43,51,0.20)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* 헤더 */}
-        <div className="flex items-start justify-between gap-3 border-b border-[#e5e5e0] p-6">
+        <div className="flex items-start justify-between gap-3 border-b border-[#E4E6EB] p-6">
           <div>
-            <h2 className="text-[22px] font-bold tracking-[-0.5px] text-[#211922]">
+            <h2 className="text-[24px] font-semibold leading-[1.33] text-[#1C2B33]">
               {restaurant.name}
             </h2>
-            <p className="mt-0.5 text-[13px] text-[#62625b]">
+            <p className="mt-0.5 text-[13px] text-[#65676B]">
               {restaurant.category} · {restaurant.signatureMenu}
             </p>
           </div>
           <button
             onClick={onClose}
             aria-label="닫기"
-            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#e0e0d9] text-[#211922] transition hover:bg-[#d4d4cc]"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#E4E6EB] text-[#1C2B33] transition hover:bg-[#D8DADF]"
           >
             <X size={18} aria-hidden />
           </button>
         </div>
 
-        {/* 탭 */}
+        {/* 탭 (Segmented) */}
         <div className="flex gap-2 px-6 pt-4">
           {CATEGORIES.map((c) => (
             <button
               key={c}
               onClick={() => setTab(c)}
-              className={`rounded-2xl px-4 py-2 text-[14px] font-bold transition ${
+              className={`rounded-[8px] px-4 py-2 text-[14px] font-semibold transition ${
                 tab === c
-                  ? "bg-[#e60023] text-white"
-                  : "bg-[#e5e5e0] text-[#211922] hover:bg-[#d9d9d2]"
+                  ? "bg-[#0064E0] text-white"
+                  : "bg-[#F0F2F5] text-[#65676B] hover:bg-[#E4E6EB]"
               }`}
             >
               {PHOTO_CATEGORY_LABEL[c]}
@@ -85,53 +89,53 @@ export default function RestaurantGallery({
           ))}
         </div>
 
-        {/* 본문 */}
+        {/* 예시 이미지 안내 배너 */}
+        {isRepresentative ? (
+          <div className="mx-6 mt-4 flex items-start gap-2 rounded-[8px] bg-[rgba(0,100,224,0.08)] px-4 py-3 text-[13px] leading-[1.5] text-[#0064E0]">
+            <Info size={16} className="mt-0.5 shrink-0" aria-hidden />
+            <span>
+              아래는 분위기를 전하기 위한 <b>예시 이미지</b>입니다 (실제 매장
+              사진 아님). 실제 사진은 하단의 네이버·구글 이미지에서 확인하세요.
+            </span>
+          </div>
+        ) : null}
+
+        {/* 이미지 그리드 */}
         <div className="min-h-0 flex-1 overflow-y-auto p-6">
-          {photos.length > 0 ? (
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {photos.map((src, i) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  key={i}
-                  src={src}
-                  alt={`${restaurant.name} ${PHOTO_CATEGORY_LABEL[tab]} ${i + 1}`}
-                  loading="lazy"
-                  className="aspect-square w-full rounded-[16px] object-cover ring-1 ring-[#e5e5e0]"
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center rounded-[20px] bg-[#f6f6f3] px-6 py-12 text-center">
-              <ImageOff size={32} className="text-[#91918c]" aria-hidden />
-              <p className="mt-3 text-[16px] font-bold text-[#211922]">
-                아직 등록된 {PHOTO_CATEGORY_LABEL[tab]} 사진이 없습니다
-              </p>
-              <p className="mt-1 max-w-[420px] text-[14px] leading-[1.5] text-[#62625b]">
-                데이터 무결성을 위해 출처가 확인된 사진만 노출합니다. 아래에서
-                실제 사진을 바로 확인하세요.
-              </p>
-              <div className="mt-5 flex flex-wrap justify-center gap-2">
-                <a
-                  href={naverImageSearchUrl(query)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-2xl bg-[#03c75a] px-4 py-2 text-[14px] font-bold text-white transition hover:bg-[#02b350]"
-                >
-                  네이버 이미지
-                  <ExternalLink size={14} aria-hidden />
-                </a>
-                <a
-                  href={googleImageSearchUrl(query)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-2xl bg-[#e5e5e0] px-4 py-2 text-[14px] font-bold text-[#211922] transition hover:bg-[#d9d9d2]"
-                >
-                  구글 이미지
-                  <ExternalLink size={14} aria-hidden />
-                </a>
-              </div>
-            </div>
-          )}
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {photos.map((src, i) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={i}
+                src={src}
+                alt={`${restaurant.name} ${PHOTO_CATEGORY_LABEL[tab]} ${i + 1}`}
+                loading="lazy"
+                className="aspect-square w-full rounded-[8px] bg-[#F0F2F5] object-cover"
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* 실제 사진 검색 링크 */}
+        <div className="flex flex-wrap gap-2 border-t border-[#E4E6EB] px-6 py-4">
+          <a
+            href={naverImageSearchUrl(query)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#03c75a] px-4 py-2 text-[14px] font-semibold text-white transition hover:brightness-95"
+          >
+            네이버 이미지
+            <ExternalLink size={14} aria-hidden />
+          </a>
+          <a
+            href={googleImageSearchUrl(query)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#E4E6EB] px-4 py-2 text-[14px] font-semibold text-[#1C2B33] transition hover:bg-[#D8DADF]"
+          >
+            구글 이미지
+            <ExternalLink size={14} aria-hidden />
+          </a>
         </div>
       </div>
     </div>

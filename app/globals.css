@@ -1,43 +1,48 @@
 @import "tailwindcss";
 
 /*
-  Pinterest Gestalt 토큰 (design.md 기반)
-  - 단일 액센트: Pinterest Red #e60023 (Primary CTA 전용)
-  - 따뜻한 화이트 캔버스 + 올리브/샌드 뉴트럴
-  - 플럼 블랙(#211922) 텍스트, 16px 라운드(필 아님)
+  Meta 디자인 토큰 (design.md 기반)
+  - 인터랙티브: Meta Blue #0064E0 / 브랜드 그라데이션 #0064E0→#0082FB (히어로·주요 CTA)
+  - 텍스트 잉크 #1C2B33 (순수 검정 금지), 본문 그레이 #65676B
+  - 제품 캔버스 #F0F2F5 위에 흰 카드 + 잉크 톤 섀도
 */
 :root {
-  --pin-red: #e60023;
-  --plum-black: #211922;
-  --olive-gray: #62625b;
-  --warm-silver: #91918c;
-  --sand-gray: #e5e5e0;
-  --warm-light: #e0e0d9;
-  --fog: #f6f6f3;
-  --dark-surface: #33332e;
-  --focus-blue: #435ee5;
+  --meta-blue: #0064e0;
+  --meta-blue-light: #0082fb;
+  --meta-blue-hover: #0058c4;
+  --ink: #1c2b33;
+  --gray-700: #465a69;
+  --gray-600: #65676b;
+  --gray-500: #8a8d91;
+  --gray-200: #e4e6eb;
+  --gray-100: #f0f2f5;
+  --success: #42b72a;
+  --error: #fa383e;
+  --warning: #f5a623;
+  --brand-gradient: linear-gradient(120deg, #0064e0 0%, #0082fb 100%);
 
   --background: #ffffff;
-  --foreground: var(--plum-black);
+  --foreground: var(--ink);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  /* Pin Sans 폴백 스택 (글로벌 CJK 포함) */
-  font-family: "Pin Sans", -apple-system, system-ui, "Segoe UI", Roboto,
-    "Apple SD Gothic Neo", "Noto Sans KR", "Helvetica Neue", Helvetica,
-    "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, Arial, sans-serif;
+  /* Optimistic 폴백 스택 (Optimistic은 Meta 전용 폰트 → 시스템 폴백) */
+  font-family: "Optimistic Text", "Helvetica Neue", Helvetica, Arial,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo",
+    "Noto Sans KR", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* 포커스 링: Focus Blue (Gestalt 시맨틱 토큰) */
+/* 포커스 링: Meta Blue (HIG 접근성) */
 :focus-visible {
-  outline: 2px solid var(--focus-blue);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 100, 224, 0.18);
+  border-radius: 6px;
 }
 
-/* 메이슨리 그리드 (Pinterest 시그니처 레이아웃) */
+/* 메이슨리 그리드 */
 .masonry {
   column-gap: 1.25rem;
 }

@@ -5,9 +5,9 @@ import MapLinks from "@/components/MapLinks";
 import { THEME_LABEL, type ScoredRestaurant } from "@/types";
 
 const TRUST_DOT: Record<ScoredRestaurant["trustLevel"], string> = {
-  high: "bg-[#103c25]",
-  medium: "bg-[#a25e00]",
-  low: "bg-[#91918c]",
+  high: "bg-[#42B72A]",
+  medium: "bg-[#F5A623]",
+  low: "bg-[#8A8D91]",
 };
 
 const TRUST_LABEL: Record<ScoredRestaurant["trustLevel"], string> = {
@@ -26,9 +26,9 @@ export default function RestaurantCard({
   const clickable = Boolean(onOpenGallery);
   return (
     <article
-      className={`flex flex-col rounded-[20px] bg-white p-6 ring-1 ring-[#e5e5e0] ${
+      className={`flex flex-col rounded-[12px] bg-white p-5 shadow-[0_1px_2px_rgba(28,43,51,0.10)] ${
         clickable
-          ? "cursor-pointer transition hover:bg-[#fcfcfa] hover:ring-[#d4d4cc]"
+          ? "cursor-pointer transition hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(28,43,51,0.12)]"
           : ""
       }`}
       onClick={onOpenGallery}
@@ -48,29 +48,29 @@ export default function RestaurantCard({
     >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <span className="inline-block rounded-full bg-[#e0e0d9] px-2.5 py-1 text-[12px] font-medium text-[#211922]">
+          <span className="inline-block rounded-full bg-[rgba(0,100,224,0.12)] px-2.5 py-1 text-[12px] font-semibold text-[#0064E0]">
             {THEME_LABEL[r.theme]}
           </span>
-          <h3 className="mt-2 text-[20px] font-bold leading-tight tracking-[-0.5px] text-[#211922]">
+          <h3 className="mt-2 text-[20px] font-semibold leading-[1.4] text-[#1C2B33]">
             {r.name}
           </h3>
-          <p className="mt-0.5 text-[12px] text-[#62625b]">{r.category}</p>
+          <p className="mt-0.5 text-[13px] text-[#8A8D91]">{r.category}</p>
         </div>
         <div className="text-right">
-          <div className="text-[34px] font-bold leading-none text-[#e60023]">
+          <div className="text-[32px] font-bold leading-none text-[#0064E0]">
             {r.insightScore}
           </div>
-          <div className="mt-1 text-[10px] font-bold uppercase tracking-wide text-[#91918c]">
+          <div className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-[#8A8D91]">
             Insight
           </div>
         </div>
       </div>
 
-      <p className="mt-3 text-[16px] leading-[1.4] text-[#62625b]">
+      <p className="mt-3 text-[15px] leading-[1.47] text-[#65676B]">
         {r.description}
       </p>
 
-      <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-[12px] font-medium text-[#211922]">
+      <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-[12px] font-semibold text-[#1C2B33]">
         <span className="inline-flex items-center gap-1.5">
           <span
             className={`inline-block h-2 w-2 rounded-full ${TRUST_DOT[r.trustLevel]}`}
@@ -86,45 +86,45 @@ export default function RestaurantCard({
         ) : null}
         {r.verification.localFavorite ? <span>현지인 추천</span> : null}
         {r.adFiltered ? (
-          <span className="inline-flex items-center gap-1 text-[#9e0a0a]">
+          <span className="inline-flex items-center gap-1 text-[#FA383E]">
             <AlertTriangle size={14} aria-hidden />
             광고 의심 필터링
           </span>
         ) : null}
       </div>
 
-      <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 border-t border-[#e5e5e0] pt-4 text-[12px] text-[#62625b]">
+      <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 border-t border-[#E4E6EB] pt-4 text-[12px] text-[#8A8D91]">
         <div className="flex justify-between">
           <dt>구글</dt>
-          <dd className="font-medium text-[#211922]">
+          <dd className="font-semibold text-[#1C2B33]">
             {r.ratings.google} · {r.ratings.googleCount}
           </dd>
         </div>
         <div className="flex justify-between">
           <dt>네이버</dt>
-          <dd className="font-medium text-[#211922]">
+          <dd className="font-semibold text-[#1C2B33]">
             {r.ratings.naver} · {r.ratings.naverCount}
           </dd>
         </div>
         <div className="flex justify-between">
           <dt>평점 편차 σ</dt>
-          <dd className="font-medium text-[#211922]">
+          <dd className="font-semibold text-[#1C2B33]">
             {r.scoreBreakdown.ratingDeviation}
           </dd>
         </div>
         <div className="flex justify-between">
           <dt>검증 보너스</dt>
-          <dd className="font-medium text-[#211922]">
+          <dd className="font-semibold text-[#1C2B33]">
             +{r.scoreBreakdown.verificationBonus}
           </dd>
         </div>
       </dl>
 
-      <div className="mt-4 flex items-center gap-1.5 text-[12px] text-[#91918c]">
+      <div className="mt-4 flex items-center gap-1.5 text-[12px] text-[#8A8D91]">
         <MapPin size={14} aria-hidden className="shrink-0" />
         <span>{r.address}</span>
       </div>
-      <div className="mt-1 text-[12px] text-[#91918c]">
+      <div className="mt-1 text-[12px] text-[#8A8D91]">
         {r.priceRange} · {r.signatureMenu}
       </div>
 
@@ -133,7 +133,7 @@ export default function RestaurantCard({
       </div>
 
       {clickable ? (
-        <div className="mt-4 inline-flex items-center gap-1.5 text-[12px] font-bold text-[#e60023]">
+        <div className="mt-4 inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#0064E0]">
           <Camera size={14} aria-hidden />
           카드를 누르면 사진 갤러리가 열립니다
         </div>

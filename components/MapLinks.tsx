@@ -15,7 +15,7 @@ export default function MapLinks({
         href={naverMapUrl(name)}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 rounded-2xl bg-[#03c75a] px-3 py-1.5 text-[12px] font-bold text-white transition hover:bg-[#02b350]"
+        className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#03c75a] px-3 py-1.5 text-[12px] font-semibold text-white transition hover:brightness-95"
         aria-label={`${name} 네이버 지도에서 보기`}
       >
         <MapPin size={14} aria-hidden />
@@ -25,7 +25,7 @@ export default function MapLinks({
         href={googleMapUrl(name)}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 rounded-2xl bg-[#e5e5e0] px-3 py-1.5 text-[12px] font-bold text-[#211922] transition hover:bg-[#d9d9d2]"
+        className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#E4E6EB] px-3 py-1.5 text-[12px] font-semibold text-[#1C2B33] transition hover:bg-[#D8DADF]"
         aria-label={`${name} 구글 지도에서 보기`}
       >
         <MapPin size={14} aria-hidden />

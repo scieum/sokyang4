@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import {
   Sun,
   CloudRain,
@@ -9,6 +9,7 @@ import {
   Check,
   type LucideIcon,
 } from "lucide-react";
+import WeatherWidget from "@/components/WeatherWidget";
 import { curateRoute, isBadWeather, weatherAdvice } from "@/lib/weather";
 import {
   WEATHER_LABEL,
@@ -29,6 +30,17 @@ export default function RoutesView({
   attractions: Attraction[];
 }) {
   const [weather, setWeather] = useState<WeatherCondition>("clear");
+  // 실시간 날씨로 자동 1회 동기화 (이후엔 사용자 수동 선택 우선)
+  const userChanged = useRef(false);
+
+  const handleLiveCondition = useCallback((c: WeatherCondition) => {
+    if (!userChanged.current) setWeather(c);
+  }, []);
+
+  const selectWeather = (c: WeatherCondition) => {
+    userChanged.current = true;
+    setWeather(c);
+  };
 
   const curated = useMemo(
     () => curateRoute(attractions, weather),
@@ -38,15 +50,20 @@ export default function RoutesView({
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2">
+      {/* 실시간 GPS 기상 위젯 — 상단 고정 */}
+      <div className="sticky top-16 z-30">
+        <WeatherWidget onCondition={handleLiveCondition} />
+      </div>
+
+      <div className="mt-8 flex flex-wrap gap-2">
         {WEATHER_OPTIONS.map(({ value, Icon }) => (
           <button
             key={value}
-            onClick={() => setWeather(value)}
-            className={`inline-flex items-center gap-2 rounded-2xl px-4 py-2 text-[14px] font-bold transition ${
+            onClick={() => selectWeather(value)}
+            className={`inline-flex items-center gap-2 rounded-[8px] px-4 py-2 text-[14px] font-semibold transition ${
               weather === value
-                ? "bg-[#e60023] text-white"
-                : "bg-[#e5e5e0] text-[#211922] hover:bg-[#d9d9d2]"
+                ? "bg-[#0064E0] text-white"
+                : "bg-[#F0F2F5] text-[#65676B] hover:bg-[#E4E6EB]"
             }`}
           >
             <Icon size={16} aria-hidden />
@@ -55,7 +72,7 @@ export default function RoutesView({
         ))}
       </div>
 
-      <p className="mt-6 text-[18px] leading-[1.4] text-[#62625b]">
+      <p className="mt-6 text-[17px] leading-[1.53] text-[#65676B]">
         {weatherAdvice(weather)}
       </p>
 
@@ -63,24 +80,24 @@ export default function RoutesView({
         {curated.map((a) => (
           <article
             key={a.id}
-            className="rounded-[20px] bg-white p-6 ring-1 ring-[#e5e5e0]"
+            className="rounded-[12px] bg-white p-5 shadow-[0_1px_2px_rgba(28,43,51,0.10)]"
           >
             <div className="flex items-center justify-between gap-3">
-              <span className="inline-block rounded-full bg-[#e0e0d9] px-2.5 py-1 text-[12px] font-medium text-[#211922]">
+              <span className="inline-block rounded-full bg-[rgba(0,100,224,0.12)] px-2.5 py-1 text-[12px] font-semibold text-[#0064E0]">
                 {a.type === "indoor" ? "실내" : "야외"}
               </span>
               {bad && a.weatherProof ? (
-                <span className="inline-flex items-center gap-1 text-[12px] font-bold text-[#103c25]">
+                <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#42B72A]">
                   <Check size={14} aria-hidden />
                   악천후 추천
                 </span>
               ) : null}
             </div>
-            <h3 className="mt-2 text-[20px] font-bold leading-tight tracking-[-0.5px] text-[#211922]">
+            <h3 className="mt-2 text-[20px] font-semibold leading-[1.4] text-[#1C2B33]">
               {a.name}
             </h3>
-            <p className="mt-0.5 text-[12px] text-[#62625b]">{a.category}</p>
-            <p className="mt-3 text-[16px] leading-[1.4] text-[#62625b]">
+            <p className="mt-0.5 text-[12px] text-[#8A8D91]">{a.category}</p>
+            <p className="mt-3 text-[15px] leading-[1.47] text-[#65676B]">
               {a.description}
             </p>
           </article>

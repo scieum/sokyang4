@@ -27,52 +27,53 @@ const principles = [
 export default function Home() {
   return (
     <main className="bg-white">
-      {/* 히어로 — 화이트 캔버스, 70px 플럼 블랙 헤드라인 */}
-      <section className="mx-auto max-w-[1100px] px-5 py-24 text-center">
-        <p className="text-[16px] font-bold text-[#e60023]">속초 인사이트</p>
-        <h1 className="mx-auto mt-4 max-w-[860px] text-[clamp(44px,8vw,70px)] font-semibold leading-[1.05] tracking-[-1.2px] text-[#211922]">
-          광고 없는 진짜 속초를 만나다
-        </h1>
-        <p className="mx-auto mt-6 max-w-[600px] text-[18px] leading-[1.4] text-[#62625b]">
-          오염된 여행 정보 대신, 교차 검증된 데이터로 현지인 가성비와 공신력 있는
-          정보를 제공합니다.
-        </p>
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="/restaurants"
-            className="rounded-2xl bg-[#e60023] px-6 py-3 text-[16px] font-bold text-white transition hover:bg-[#ad081b]"
-          >
-            맛집 큐레이션
-          </Link>
-          <Link
-            href="/routes"
-            className="rounded-2xl bg-[#e5e5e0] px-6 py-3 text-[16px] font-bold text-[#211922] transition hover:bg-[#d9d9d2]"
-          >
-            기상 동선 보기
-          </Link>
+      {/* 그라데이션 히어로 (브랜드 에너지 — 화면당 1회) */}
+      <section className="mx-auto max-w-[1100px] px-4 py-12">
+        <div className="overflow-hidden rounded-[20px] bg-[linear-gradient(120deg,#0064E0,#0082FB)] px-6 py-20 text-center text-white shadow-[0_8px_32px_rgba(0,100,224,0.30)]">
+          <h1 className="mx-auto max-w-[760px] text-[clamp(36px,7vw,56px)] font-bold leading-[1.07] tracking-[-0.02em]">
+            광고 없는 진짜 속초를 만나다
+          </h1>
+          <p className="mx-auto mt-5 max-w-[620px] text-[17px] leading-[1.53] text-white/90">
+            오염된 여행 정보 대신, 교차 검증된 데이터로 현지인 가성비와 공신력
+            있는 정보를 제공합니다.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/restaurants"
+              className="rounded-[28px] bg-white px-7 py-3.5 text-[15px] font-semibold text-[#0064E0] transition hover:bg-white/90"
+            >
+              맛집 큐레이션
+            </Link>
+            <Link
+              href="/routes"
+              className="rounded-[28px] border-[1.5px] border-white/80 px-7 py-3.5 text-[15px] font-semibold text-white transition hover:bg-white/10"
+            >
+              기상 동선 보기
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* 피처 — 따뜻한 포그 카드 (20px 라운드) */}
-      <section className="bg-[#f6f6f3]">
-        <div className="mx-auto max-w-[1100px] px-5 py-20">
+      {/* 피처 — 제품 캔버스(#F0F2F5) 위 흰 카드 */}
+      <section className="bg-[#F0F2F5]">
+        <div className="mx-auto max-w-[1100px] px-4 py-16">
           <div className="grid gap-5 sm:grid-cols-2">
             {features.map(({ href, Icon, title, desc, cta }) => (
               <Link
                 key={href}
                 href={href}
-                className="group flex flex-col rounded-[28px] bg-white p-8 transition hover:bg-[#fcfcfa]"
+                className="group flex flex-col rounded-[16px] bg-white p-6 shadow-[0_1px_2px_rgba(28,43,51,0.10)] transition hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(28,43,51,0.12)]"
               >
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#e0e0d9] text-[#211922]">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(0,100,224,0.12)] text-[#0064E0]">
                   <Icon size={24} aria-hidden />
                 </span>
-                <h2 className="mt-5 text-[28px] font-bold leading-tight tracking-[-1.2px] text-[#211922]">
+                <h2 className="mt-4 text-[24px] font-semibold leading-[1.33] text-[#1C2B33]">
                   {title}
                 </h2>
-                <p className="mt-3 text-[16px] leading-[1.4] text-[#62625b]">
+                <p className="mt-2 text-[15px] leading-[1.47] text-[#65676B]">
                   {desc}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-1 text-[14px] font-bold text-[#e60023]">
+                <span className="mt-5 inline-flex items-center gap-1 text-[15px] font-semibold text-[#0064E0]">
                   {cta}
                   <ArrowRight
                     size={16}
@@ -86,19 +87,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 원칙 — 화이트 섹션, 워밍 카드 */}
+      {/* 원칙 */}
       <section className="bg-white">
-        <div className="mx-auto max-w-[1100px] px-5 py-20">
-          <h2 className="text-center text-[28px] font-bold tracking-[-1.2px] text-[#211922]">
+        <div className="mx-auto max-w-[1100px] px-4 py-16">
+          <h2 className="text-center text-[32px] font-semibold leading-[1.25] tracking-[-0.01em] text-[#1C2B33]">
             데이터 무결성
           </h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
             {principles.map((p) => (
-              <div key={p.label} className="rounded-[20px] bg-[#f6f6f3] p-7">
-                <p className="text-[18px] font-bold text-[#211922]">
+              <div
+                key={p.label}
+                className="rounded-[12px] bg-white p-6 shadow-[0_1px_2px_rgba(28,43,51,0.10)]"
+              >
+                <p className="text-[20px] font-semibold text-[#1C2B33]">
                   {p.label}
                 </p>
-                <p className="mt-2 text-[14px] leading-[1.5] text-[#62625b]">
+                <p className="mt-2 text-[15px] leading-[1.47] text-[#65676B]">
                   {p.value}
                 </p>
               </div>
