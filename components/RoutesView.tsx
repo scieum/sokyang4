@@ -30,15 +30,20 @@ export default function RoutesView({
   attractions: Attraction[];
 }) {
   const [weather, setWeather] = useState<WeatherCondition>("clear");
-  // 실시간 날씨로 자동 1회 동기화 (이후엔 사용자 수동 선택 우선)
+  const [autoSynced, setAutoSynced] = useState(false);
+  // 실시간 날씨로 자동 동기화 (사용자가 수동 선택하면 그 선택을 우선)
   const userChanged = useRef(false);
 
   const handleLiveCondition = useCallback((c: WeatherCondition) => {
-    if (!userChanged.current) setWeather(c);
+    if (!userChanged.current) {
+      setWeather(c);
+      setAutoSynced(true);
+    }
   }, []);
 
   const selectWeather = (c: WeatherCondition) => {
     userChanged.current = true;
+    setAutoSynced(false);
     setWeather(c);
   };
 
@@ -55,7 +60,14 @@ export default function RoutesView({
         <WeatherWidget onCondition={handleLiveCondition} />
       </div>
 
-      <div className="mt-8 flex flex-wrap gap-2">
+      {autoSynced ? (
+        <div className="mt-8 inline-flex items-center gap-1.5 rounded-full bg-[rgba(0,100,224,0.12)] px-3 py-1 text-[13px] font-semibold text-[#0064E0]">
+          <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-[#0064E0]" />
+          실시간 날씨 기준 ‘{WEATHER_LABEL[weather]}’ 자동 선택됨
+        </div>
+      ) : null}
+
+      <div className="mt-3 flex flex-wrap gap-2">
         {WEATHER_OPTIONS.map(({ value, Icon }) => (
           <button
             key={value}

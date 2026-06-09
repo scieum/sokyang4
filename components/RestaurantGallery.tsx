@@ -89,15 +89,12 @@ export default function RestaurantGallery({
           ))}
         </div>
 
-        {/* 예시 이미지 안내 배너 */}
+        {/* 예시 이미지 안내 (간단 캡션) */}
         {isRepresentative ? (
-          <div className="mx-6 mt-4 flex items-start gap-2 rounded-[8px] bg-[rgba(0,100,224,0.08)] px-4 py-3 text-[13px] leading-[1.5] text-[#0064E0]">
-            <Info size={16} className="mt-0.5 shrink-0" aria-hidden />
-            <span>
-              아래는 분위기를 전하기 위한 <b>예시 이미지</b>입니다 (실제 매장
-              사진 아님). 실제 사진은 하단의 네이버·구글 이미지에서 확인하세요.
-            </span>
-          </div>
+          <p className="mx-6 mt-4 inline-flex items-center gap-1.5 text-[12px] text-[#8A8D91]">
+            <Info size={13} className="shrink-0" aria-hidden />
+            참고 이미지 · 실제 매장 사진은 아래 네이버·구글에서 확인
+          </p>
         ) : null}
 
         {/* 이미지 그리드 */}
