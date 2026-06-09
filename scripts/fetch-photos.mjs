@@ -32,12 +32,20 @@ async function writeMap(obj) {
 }
 
 async function findPlaceId(name, lat, lng) {
-  const url =
+  // 1) Find Place — 상호명 + 위치 바이어스(좌표 6km)로 정확 매칭
+  const findUrl =
     `${GMAP}/findplacefromtext/json?input=${encodeURIComponent(name)}` +
-    `&inputtype=textquery&fields=place_id&language=ko` +
+    `&inputtype=textquery&fields=place_id&language=ko&region=kr` +
     `&locationbias=circle:6000@${lat},${lng}&key=${KEY}`;
-  const j = await (await fetch(url)).json();
-  return j.candidates?.[0]?.place_id ?? null;
+  const found = await (await fetch(findUrl)).json();
+  if (found.candidates?.[0]?.place_id) return found.candidates[0].place_id;
+
+  // 2) Text Search 폴백 — "상호명 속초"
+  const textUrl =
+    `${GMAP}/textsearch/json?query=${encodeURIComponent(`${name} 속초`)}` +
+    `&language=ko&region=kr&location=${lat},${lng}&radius=8000&key=${KEY}`;
+  const text = await (await fetch(textUrl)).json();
+  return text.results?.[0]?.place_id ?? null;
 }
 
 async function getPhotoRefs(placeId) {
