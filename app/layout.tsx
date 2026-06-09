@@ -48,8 +48,6 @@ export default function RootLayout({
 
         {children}
 
-        <AdSlot />
-
         {/* 다크 풀-위드 푸터 (#1C2B33) + 제작 정보 */}
         <footer className="bg-[#1C2B33] py-10">
           <div className="mx-auto max-w-[1100px] px-4">
@@ -70,6 +68,9 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+
+        {/* 페이지 맨 아래 고정 광고 (스크롤을 따라다니지 않음) */}
+        <AdSlot />
       </body>
     </html>
   );
