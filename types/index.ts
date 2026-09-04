@@ -31,6 +31,8 @@ export interface Restaurant {
   id: string;
   name: string;
   category: string; // 회 / 물회 / 닭강정 등
+  /** 음식 종류(분류·필터용) — 예: 물회·회 / 갈비·고기 / 국수·면 / 중식 등 */
+  cuisine: string;
   theme: RestaurantTheme;
   address: string;
   priceRange: string;

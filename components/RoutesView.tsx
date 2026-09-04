@@ -55,10 +55,8 @@ export default function RoutesView({
 
   return (
     <div>
-      {/* 실시간 GPS 기상 위젯 — 상단 고정 */}
-      <div className="sticky top-16 z-30">
-        <WeatherWidget onCondition={handleLiveCondition} />
-      </div>
+      {/* 실시간 GPS 기상 위젯 — 상단 (스크롤을 따라다니지 않음) */}
+      <WeatherWidget onCondition={handleLiveCondition} />
 
       {autoSynced ? (
         <div className="mt-8 inline-flex items-center gap-1.5 rounded-full bg-[rgba(0,100,224,0.12)] px-3 py-1 text-[13px] font-semibold text-[#0064E0]">
