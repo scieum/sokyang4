@@ -1,8 +1,9 @@
 "use client";
 
-import { AlertTriangle, Award, Camera, MapPin } from "lucide-react";
+import { AlertTriangle, Award, Camera, MapPin, Navigation } from "lucide-react";
 import MapLinks from "@/components/MapLinks";
-import { THEME_LABEL, type ScoredRestaurant } from "@/types";
+import { formatDistance } from "@/lib/geo";
+import { type ScoredRestaurant } from "@/types";
 
 const TRUST_DOT: Record<ScoredRestaurant["trustLevel"], string> = {
   high: "bg-[#42B72A]",
@@ -19,9 +20,11 @@ const TRUST_LABEL: Record<ScoredRestaurant["trustLevel"], string> = {
 export default function RestaurantCard({
   r,
   onOpenGallery,
+  distanceKm,
 }: {
   r: ScoredRestaurant;
   onOpenGallery?: () => void;
+  distanceKm?: number;
 }) {
   const clickable = Boolean(onOpenGallery);
   return (
@@ -48,9 +51,17 @@ export default function RestaurantCard({
     >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <span className="inline-block rounded-full bg-[rgba(0,100,224,0.12)] px-2.5 py-1 text-[12px] font-semibold text-[#0064E0]">
-            {THEME_LABEL[r.theme]}
-          </span>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="inline-block rounded-full bg-[rgba(0,100,224,0.12)] px-2.5 py-1 text-[12px] font-semibold text-[#0064E0]">
+              {r.cuisine}
+            </span>
+            {distanceKm !== undefined ? (
+              <span className="inline-flex items-center gap-1 rounded-full bg-[#F0F2F5] px-2.5 py-1 text-[12px] font-semibold text-[#1C2B33]">
+                <Navigation size={12} aria-hidden />
+                {formatDistance(distanceKm)}
+              </span>
+            ) : null}
+          </div>
           <h3 className="mt-2 text-[20px] font-semibold leading-[1.4] text-[#1C2B33]">
             {r.name}
           </h3>
