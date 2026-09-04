@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { UtensilsCrossed, CloudSun } from "lucide-react";
 import AdSlot from "@/components/AdSlot";
+import ChatBot from "@/components/ChatBot";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -58,13 +59,16 @@ export default function RootLayout({
               데이터 무결성(Data Integrity)을 지향하는 속초 여행 큐레이션 · MVP
               (목업 데이터)
             </p>
-            <div className="mt-5 border-t border-white/10 pt-4 text-[13px] text-[#BCC0C4]">
-              <p>
-                제작사 <span className="font-semibold text-white">Viva Sokcho</span>
-              </p>
-              <p className="mt-1">
-                제작자 <span className="font-semibold text-white">신현우</span>
-              </p>
+            <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/10 pt-4 text-[13px] text-[#BCC0C4]">
+              <div>
+                <p>
+                  제작사 <span className="font-semibold text-white">Viva Sokcho</span>
+                </p>
+                <p className="mt-1">
+                  제작자 <span className="font-semibold text-white">신현우</span>
+                </p>
+              </div>
+              <ChatBot />
             </div>
           </div>
         </footer>
